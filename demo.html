@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>MSF API Single-Page App Demo</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="config.js"></script>
+    <script src="bundle.js"></script>
+    <script type="text/javascript">
+      
+      // Define a variable for the api
+      let msfapi = undefined;
+
+      // Define a general-purpose error logger
+      function errorLogger(err) {
+        console.log('App Error:', err);
+      }
+
+      // Define a helper function to register click handlers
+      function registerClick(query, handler) {
+        document.querySelector(query).addEventListener('click', function (event) {
+          handler(event);
+          event.preventDefault();
+        });
+      }
+
+      // Define a helper function to get a document element
+      function qs(query) {
+        return document.querySelector(query);
+      }
+      
+      // Define a helper function to switch between logged in/out states
+      function setLoggedIn(loggedIn) {
+        qs('#loggedIn').style.display = loggedIn ? '' : 'none';
+        qs('#loggedOut').style.display = loggedIn ? 'none' : '';
+        qs('#lang').innerText = msfapi.getPlayerLang() || 'none';
+        setTcp('none');
+      }
+
+      // Define a helper function to update tcp display
+      function setTcp(tcp) {
+        qs('#tcp').innerText = tcp;
+        qs('#errDisplay').innerText = '';
+      }
+
+      // Define a helper function to render a fetch error
+      async function renderFetchError(response) {
+        const bodyText = await response.text().catch(() => {});
+        const errText = `Fetch Error: HTTP Status ${response.status}:${response.statusText}\nBody: ${bodyText}`;
+        qs('#errDisplay').innerText = errText;
+      }
+
+      // This gets called when the document loads
+      async function onLoad() {
+
+        // Load SDK
+        console.log('Loading SDK');
+        msfapi = new App(
+          CLIENT_ID,
+          'm3p.f.pr.pro m3p.f.pr.act openid offline', // space-separated scope list
+          APP_CALLBACK
+        );
+
+        //////////////////////////////////////
+        //  Define what all the buttons do  //
+        //////////////////////////////////////
+
+        registerClick('#login', function (event) {
+          // Redirect the user to log in
+          msfapi.makeAuthorizationRequest();
+        });
+
+        registerClick('#fetchTcp', async function (event) {
+          const response = await msfapi.fetch('/player/v1/card');
+          if(!response.ok) {
+            setTcp('err');
+            renderFetchError(response);
+            return;
+          }
+          const json = await response.json();
+          const tcp = json.data && json.data.tcp || 'missing';
+          setTcp(tcp);
+        });
+
+        registerClick('#clearTcp', function (event) {
+          setTcp('none');
+        });
+
+        registerClick('#expireAccessToken', function (event) {
+          msfapi.debugExpireAccessToken();
+        });
+
+        registerClick('#logout', async function (event) {
+          await msfapi.clearLocal();
+          setLoggedIn(false);
+        });
+
+        registerClick('#logoutAll', async function (event) {
+          const response = await msfapi.fetch('/player/v1/auth/consents', 'delete');
+          if(!response.ok) {
+            renderFetchError(response);
+            return;
+          }
+          await msfapi.clearLocal();
+          setLoggedIn(false);
+        });
+
+        // Check if the player is already logged in
+        const loggedIn = await msfapi
+          .checkForAuthorizationResponse()
+          .catch(errorLogger);
+        
+        // Update the UI to match the logged in state
+        setLoggedIn(loggedIn);
+
+      }
+    </script>
+  </head>
+  <body onLoad='onLoad();'>
+    <div>
+      <h1>Welcome to the MSF API Single-Page App Demo</h1>
+      <h2>App</h2>
+      <div id="loggedOut">
+        <p><button type="button" id="login">Login</button></p>
+      </div>
+      <div id="loggedIn" style="display:none;">
+        <p>
+          Your Language: <b id="lang">none</b>
+        </p>
+        <p>
+          <button id="logout">Logout</button>
+          <button id="logoutAll">Logout All Sessions</button>
+        </p>
+        <p>
+          Your TCP: <b id="tcp">none</b>
+          <button id="fetchTcp">Fetch from game.</button>
+        </p>
+        <p>
+          <button id="clearTcp">Clear TCP</button>
+          <button id="expireAccessToken">Debug Expire Access Token</button>
+        </p>
+        <h2>Debug</h2>
+        <pre id="errDisplay"></pre>
+      </div>
+      <p>
+        <a href="privacy.html">Privacy</a>
+      </p>
+    </div>
+  </body>
+</html>

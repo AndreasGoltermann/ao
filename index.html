@@ -9,9 +9,51 @@
 <body>
     <h1>Age of Hydra</h1>
     <p>Community webpage</p>
-    <button>
+    <button id="demoButton">
         Test
     </button>
     <div id="footer"></div>
+    <button id="getDataButton">Get Data from API</button>
+
+    <div class="text" id="dataContainer">
+        <!-- Data from API will be displayed here -->
+    </div>
+
+    <script>
+        document.getElementById('getDataButton').addEventListener('click', getDataFromAPI);
+
+        document.getElementById('demoButton').addEventListener('click', function() {
+            // Navigate to another HTML page on the same domain
+            window.location.href = 'demo.html';
+        });
+
+        function getDataFromAPI() {
+            fetch('https://api.marvelstrikeforce.com/game/v1/characters') // Replace with the URL of the API endpoint
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    displayData(data);
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
+        }
+
+        function displayData(data) {
+            const dataContainer = document.getElementById('dataContainer');
+            // Clear previous data
+            dataContainer.innerHTML = '';
+            // Display data in the container
+            data.forEach(item => {
+                const listItem = document.createElement('div');
+                listItem.textContent = item.name; // Example: Assuming each item has a 'name' property
+                dataContainer.appendChild(listItem);
+            });
+        }
+    </script>
 </body>
 </html>
