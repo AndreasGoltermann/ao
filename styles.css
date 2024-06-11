@@ -23,8 +23,22 @@ button {
     background-color: yellowgreen;
     color: black;
     font-size: large;
+    border-radius: 5px;
 }
-
+.text_container {
+    margin-left: 10%;
+    width: 80%;
+    height: fit-content;
+    border: 3px solid yellow;
+    border-radius: 15px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
 .text {
     color: white;
+}
+.menu_container {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 50px;
+    border: 3px solid yellow;
 }
