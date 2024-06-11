@@ -14,3 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function toRaid() {
     window.location.href = 'raid.html';
 }
+
+function toGuide() {
+    window.location.href = 'https://docs.google.com/spreadsheets/d/1L6DyBnbm97NNwsBlPwCpFf_W9XxKSMnqZJ8G4Ul7t6Q/edit?usp=sharing';
+}
