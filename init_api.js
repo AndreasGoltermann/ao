@@ -46,9 +46,9 @@ async function onLoad() {
 // Load SDK
 console.log('Loading SDK');
 msfapi = new App(
-    " e1656301-9783-4480-9e0d-101b1fb765de",
+    CLIENT_ID,
     'm3p.f.pr.pro m3p.f.pr.act openid offline', // space-separated scope list
-    "redirect.html"
+    APP_CALLBACK
 );
 
 //////////////////////////////////////
