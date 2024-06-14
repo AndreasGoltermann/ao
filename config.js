@@ -1,5 +1,5 @@
 const APP_ROOT = 'https://aohcommunity.com';
-const CLIENT_ID = ' e1656301-9783-4480-9e0d-101b1fb765de';
+const CLIENT_ID = '14419d51-fe48-4b42-b17f-a1714bc4f228';
 
 // Calculate frequently-used URLs from the above:
 const APP_HOME = `${APP_ROOT}/index.html`;
