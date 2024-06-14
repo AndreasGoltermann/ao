@@ -1,4 +1,4 @@
-const APP_ROOT = 'https://aohcommunity.com';
+const APP_ROOT = 'https://www.aohcommunity.com';
 const CLIENT_ID = '14419d51-fe48-4b42-b17f-a1714bc4f228';
 
 // Calculate frequently-used URLs from the above:
