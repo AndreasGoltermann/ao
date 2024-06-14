@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Redirect</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="config.js"></script>
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+      var queryString = window.location.search.substring(1); // includes '?'
+      var path = [APP_HOME, queryString].join('#');
+      setTimeout(function() {
+        window.location.assign(path);
+      }, 1000);
+    });
+  </script>
+</head>
+<body>
+  <h3>
+    Loading...
+  </h3>
+</body>
+
+</html>
