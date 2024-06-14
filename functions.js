@@ -12,11 +12,31 @@ document.addEventListener('DOMContentLoaded', () => {
     loadHTML('menu.html', 'menu')
 });
 
+//function toRaid() {
+//    window.location.href = 'raid.html';
+//}
+
+function qs(query) {
+    return document.querySelector(query);
+}
+
+function enable_tab(tab) {
+    qs('#alliance_info').style.display = 'none';
+    qs('#front_page').style.display = 'none';
+    qs('#raid').style.display = 'none';
+    qs(tab).style.display = '';
+}
+
 function toRaid() {
-    window.location.href = 'raid.html';
+    qs('#alliance_info').style.display = 'none';
+    qs('#front_page').style.display = 'none';
+    qs('#raid').style.display = '';
 }
 
 function toInfo() {
+    qs('#alliance_info').style.display = 'none';
+    qs('#front_page').style.display = 'none';
+    qs('#raid').style.display = 'none';
     window.location.href = 'alliance_info.html';
 }
 

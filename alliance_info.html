@@ -21,6 +21,25 @@
             <div id="loggedOut">
                 <p><button type="button" id="login">Login</button></p>
             </div>
+            <div id="loggedIn" style="display:none;">
+                <p>
+                  Your Language: <b id="lang">none</b>
+                </p>
+                <p>
+                  <button id="logout">Logout</button>
+                  <button id="logoutAll">Logout All Sessions</button>
+                </p>
+                <p>
+                  Your TCP: <b id="tcp">none</b>
+                  <button id="fetchTcp">Fetch from game.</button>
+                </p>
+                <p>
+                  <button id="clearTcp">Clear TCP</button>
+                  <button id="expireAccessToken">Debug Expire Access Token</button>
+                </p>
+                <h2>Debug</h2>
+                <pre id="errDisplay"></pre>
+              </div>
         </div>
         <div id="footer"></div>
     </body>

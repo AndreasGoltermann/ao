@@ -5,56 +5,96 @@
             AoH Community
         </title>
         <link rel="stylesheet" href="styles.css">
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script src="functions.js"></script>
+        <script src="config.js"></script>
+        <script src="bundles.js"></script>
+        <script src="init_api.js"></script>
     </head>
-    <body>
+    <body onload="onLoad()">
         <div id="menu"></div>
         <div class="midpage">
             <img src="Age_of_Hydra.png">
             <br>
             <img src="Alliance_icon.png">
             <h1>Community webpage</h1>
-            <div class="text_container">
-                <h2>Leader</h2>
-                <h1 style="color: limegreen;">Joker</h1>
-            </div>
-            <p></p>
-            <div class="text_container">
-                <h2>Captains</h2>
-                <div style="column-count: 2;">
-                    <br>
-                    <h1 style="color: red;">P2G-{Mol}</h1>
-                    <h1 style="color: red;">ScrubsDragon</h1>
-                    <h1 style="color: red;">Jagmus</h1>
-                    <h1 style="color: red;">Elite Benny</h1>
-                    <br>
-                    <h1 style="color: red;">Theno</h1>
-                    <h1 style="color: red;">Meower</h1>
-                    <h1 style="color: red;">TheStrongestRolo</h1>
+            <div id="front_page">
+                <div class="text_container">
+                    <h2>Leader</h2>
+                    <h1 style="color: limegreen;">Joker</h1>
+                </div>
+                <p></p>
+                <div class="text_container">
+                    <h2>Captains</h2>
+                    <div style="column-count: 2;">
+                        <br>
+                        <h1 style="color: red;">P2G-{Mol}</h1>
+                        <h1 style="color: red;">ScrubsDragon</h1>
+                        <h1 style="color: red;">Jagmus</h1>
+                        <h1 style="color: red;">Elite Benny</h1>
+                        <br>
+                        <h1 style="color: red;">Theno</h1>
+                        <h1 style="color: red;">Meower</h1>
+                        <h1 style="color: red;">TheStrongestRolo</h1>
+                    </div>
+                </div>
+                <p></p>
+                <div class="text_container">
+                    <h2>Members</h2>
+                    <div style="column-count: 2;">
+                        <br>
+                        <h1>PermaStudent</h1>
+                        <h1>Hips Don't Lie</h1>
+                        <h1>Danroche97</h1>
+                        <h1>Godock2006</h1>
+                        <h1>rob</h1>
+                        <h1>Calamity</h1>
+                        <h1>Deathknight</h1>
+                        <h1>Porcupine2099</h1>
+                        <br>
+                        <h1>Wyldfire</h1>
+                        <h1>Cammytkd</h1>
+                        <h1>Chinese Ninja</h1>
+                        <h1>Leader Kay</h1>
+                        <h1>Yentrof</h1>
+                        <h1>StonedToBits</h1>
+                        <h1>Rulijah</h1>
+                        <h1>Whitewolf</h1>
+                    </div>
                 </div>
             </div>
-            <p></p>
-            <div class="text_container">
-                <h2>Members</h2>
-                <div style="column-count: 2;">
-                    <br>
-                    <h1>PermaStudent</h1>
-                    <h1>Hips Don't Lie</h1>
-                    <h1>Danroche97</h1>
-                    <h1>Godock2006</h1>
-                    <h1>rob</h1>
-                    <h1>Calamity</h1>
-                    <h1>Deathknight</h1>
-                    <h1>Porcupine2099</h1>
-                    <br>
-                    <h1>Wyldfire</h1>
-                    <h1>Cammytkd</h1>
-                    <h1>Chinese Ninja</h1>
-                    <h1>Leader Kay</h1>
-                    <h1>Yentrof</h1>
-                    <h1>StonedToBits</h1>
-                    <h1>Rulijah</h1>
-                    <h1>Whitewolf</h1>
+            <div id="raid" style="display: none;">
+                <h1>Greek raid lanes</h1>
+                <img src="greek_raid_lanes.jpg" alt="Description of the image" width=70% height=auto>
+                <div id="raid_teams"></div>
+                <h1>Ultimus raid lanes</h1>
+                <div class="text_container">
+                    <p>Use the same raid teams. There are no standard lanes, select a lane that is not used if you are one of the 
+                        first 6 players to join. If you are one of the last two, help the lanes furthest behind.</p>
+                </div>
+            </div>
+            <div id="alliance_info" style="display: none;">
+                <div id="loggedOut">
+                    <p><button type="button" id="login">Login</button></p>
+                </div>
+                <div id="loggedIn" style="display:none;">
+                    <p>
+                      Your Language: <b id="lang">none</b>
+                    </p>
+                    <p>
+                      <button id="logout">Logout</button>
+                      <button id="logoutAll">Logout All Sessions</button>
+                    </p>
+                    <p>
+                      Your TCP: <b id="tcp">none</b>
+                      <button id="fetchTcp">Fetch from game.</button>
+                    </p>
+                    <p>
+                      <button id="clearTcp">Clear TCP</button>
+                      <button id="expireAccessToken">Debug Expire Access Token</button>
+                    </p>
+                    <h2>Debug</h2>
+                    <pre id="errDisplay"></pre>
                 </div>
             </div>
         </div>
