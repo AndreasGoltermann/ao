@@ -11,6 +11,10 @@ body {
     background-size: 100% 100%;
     background-position: center;
 }
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
 .midpage {
     background-color: black;
     border-color: yellow;
