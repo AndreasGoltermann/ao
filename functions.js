@@ -9,8 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadHTML('header.html', 'header');
     loadHTML('footer.html', 'footer');
     loadHTML('raid_teams.html', 'raid_teams');
-    loadHTML('RaidTeamReader.html', 'RaidTeamReader')
-    loadHTML('menu.html', 'menu')
+    loadHTML('menu.html', 'menu');
 });
 
 //function toRaid() {
